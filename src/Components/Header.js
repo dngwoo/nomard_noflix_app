@@ -1,17 +1,60 @@
 import React from 'react';
+import styled from 'styled-components';
+import { Link, withRouter } from 'react-router-dom';
 
-export default () => (
-  <header>
-    <ul>
-      <li>
-        <a href='/'>Movies</a>
-      </li>
-      <li>
-        <a href='/tv/popular'>TV</a>
-      </li>
-      <li>
-        <a href='/search'>Search</a>
-      </li>
-    </ul>
-  </header>
-);
+const Header = styled.header`
+  color: white;
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 50px;
+  display: flex;
+  align-items: center;
+  padding: 0px 10px;
+  background-color: rgba(20, 20, 20, 0.8);
+  box-shadow: 0px, 1px, 5px, 2px rgba(0, 0, 0, 0.8);
+`;
+const List = styled.ul`
+  display: flex;
+`;
+const Item = styled.li`
+  width: 50px;
+  height: 50px;
+  text-align: center;
+  border-bottom: 5px solid ${props => (props.current ? 'red' : 'transparent')};
+  transition: border-bottom ease-in-out 0.3s;
+`;
+const SLink = styled(Link)`
+  height: 50px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+`;
+export default withRouter(props => (
+  <Header>
+    {console.log(props)}
+    <List>
+      <Item current={props.location.pathname === '/'}>
+        <SLink to='/'>Movies</SLink>
+      </Item>
+      <Item current={props.location.pathname === '/tv'}>
+        <SLink to='/tv'>TV</SLink>
+      </Item>
+      <Item current={props.location.pathname === '/search'}>
+        <SLink to='/search'>Search</SLink>
+      </Item>
+    </List>
+  </Header>
+));
+/* 컴포넌트를 사용하는 이유는 부분부분을 캡슐화하고 싶기 때문이다.
+    하지만 js,css파일로 나뉘는 건 좋지 않다.
+    Header.moudle.css <- create-react-app에서 제공해주는 기능임.
+    여기서 만들어지는 클래스네임은 여러개 사용가능. 하지만 좀 더 좋은방법이 있음.
+    yarn add styled-components
+*/
+/*
+    Global 스타일을 하는 이유는 해당 사이트의 폰트를 설정하거나 SC를 설치하거나
+    그런것들을 하고 싶어서이다
+    yarn add styled-reset
+*/
