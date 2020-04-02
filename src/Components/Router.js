@@ -5,9 +5,9 @@ import {
   Redirect,
   Switch
 } from 'react-router-dom';
-import Home from 'Routes/Home';
-import Search from 'Routes/Search';
-import TV from 'Routes/TV';
+import Home from 'Routes/Home/index';
+import Search from 'Routes/Search/index';
+import TV from 'Routes/TV/index';
 import Header from 'Components/Header';
 
 export default () => (

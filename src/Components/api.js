@@ -1,11 +1,14 @@
 import axios from 'axios';
 
 const api = axios.create({
-  baseURL: 'https://api.themoviedb.org/3',
-  params: {
-    api_key: '6b4adb92ce2293cb2b5e5315ede9c188',
-    language: 'en-US'
-  }
+  baseURL: 'https://api.themoviedb.org/3/'
+});
+
+api.interceptors.request.use(config => {
+  config.params = config.params || {};
+  config.params['api_key'] = '553c1b1a2eafa95108cbaa0d955efd30';
+  config.params['language'] = 'en-US';
+  return config;
 });
 
 export const moviesApi = {
